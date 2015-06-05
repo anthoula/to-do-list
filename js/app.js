@@ -1,3 +1,4 @@
+
 // To Do App
 var taskInput             = document.getElementById('new-task'),
     addButton             = document.getElementsByTagName('button')[0],
@@ -5,7 +6,7 @@ var taskInput             = document.getElementById('new-task'),
     completedTasksHolder  = document.getElementById('completed-tasks');
 
 // New Task List Item
-var createNewTaskElement = function( taskString ){
+var createNewTaskElement = function( taskString ) {
   // Create List Item
   var listItem     = document.createElement('li'),
       checkBox     = document.createElement('input'),
@@ -33,7 +34,7 @@ var createNewTaskElement = function( taskString ){
 }
 
 // Add a new task
-var addTask = function(){
+var addTask = function() {
 
   if ( taskInput.value === '' ) {
     alert( 'Please enter a name for the task' );
@@ -50,7 +51,7 @@ var addTask = function(){
 }
 
 // Edit an existing task
-var editTask = function(){
+var editTask = function() {
 
   var listItem      = this.parentNode,
       editInput     = listItem.querySelector('input[type=text]'),
@@ -58,7 +59,7 @@ var editTask = function(){
       containsClass = listItem.classList.contains('editMode'),
       editButton    = listItem.querySelector('button.edit');
 
-  if ( containsClass ){
+  if ( containsClass ) {
     label.innerText = editInput.value;
     editButton.innerText = 'Edit';
   } else {
@@ -70,7 +71,7 @@ var editTask = function(){
 }
 
 // Delete an existing task
-var deleteTask = function(){
+var deleteTask = function() {
 
   var listItem = this.parentNode,
       ul       = listItem.parentNode;
@@ -79,7 +80,7 @@ var deleteTask = function(){
 }
 
 // Mark a task as complete
-var taskCompleted = function(){
+var taskCompleted = function() {
 
   var listItem = this.parentNode;
 
@@ -88,14 +89,14 @@ var taskCompleted = function(){
 }
 
 // Mark a tast as incomplete
-var taskIncomplete = function(){
+var taskIncomplete = function() {
   var listItem = this.parentNode;
 
   incompleteTasksHolder.appendChild( listItem );
   bindTaskEvents( listItem, taskCompleted );
 }
 
-var bindTaskEvents = function( taskListItem, checkBoxEventHandler ){
+var bindTaskEvents = function( taskListItem, checkBoxEventHandler ) {
 
   var checkbox     = taskListItem.querySelector( 'input[type=checkbox]' ),
       editButton   = taskListItem.querySelector( 'button.edit' ),
@@ -107,8 +108,8 @@ var bindTaskEvents = function( taskListItem, checkBoxEventHandler ){
   checkbox.onchange = checkBoxEventHandler;
 }
 
-var ajaxRequest = function(){
-  console.log( 'Ajax Request' );
+var ajaxRequest = function() {
+  //console.log( 'Ajax Request' );
 }
 
 // Event Handlers
@@ -116,13 +117,13 @@ addButton.addEventListener( 'click', addTask );
 addButton.addEventListener( 'click', ajaxRequest );
 
 // Cycle over incompletedTaskHolder ul list items
-for ( var i = 0; i < incompleteTasksHolder.children.length; i++ ){
+for ( var i = 0; i < incompleteTasksHolder.children.length; i++ ) {
   // bind events to list item's children (taskCompleted)
   bindTaskEvents( incompleteTasksHolder.children[i], taskCompleted );
 }
 
 // Cycle over completedTasksHolder ul list items
-for ( var i = 0; i < completedTasksHolder.children.length; i++ ){
+for ( var i = 0; i < completedTasksHolder.children.length; i++ ) {
   // bind events to list item's children (taskCompleted)
   bindTaskEvents( completedTasksHolder.children[i], taskIncomplete );
 }
